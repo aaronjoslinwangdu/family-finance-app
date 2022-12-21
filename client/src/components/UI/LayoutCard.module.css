@@ -1,0 +1,41 @@
+.card {
+  border-radius: 15px;
+  background-color: #5c6b73;
+  margin: 10px auto auto 10px;
+}
+
+.day {
+  width: 98%;
+  height: 140px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.week {
+  background-color: red;
+  width: 98%;
+  height: 140px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.month {
+  background-color: white;
+  width: 98%;
+  height: 140px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+

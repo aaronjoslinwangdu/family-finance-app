@@ -1,0 +1,55 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 15px;
+  margin: 5px 5px 5px 10px;
+  height: 100px;
+  width: 100px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.expense {
+  background: #c2dfe3;
+}
+
+.date {
+  background: #253237;
+}
+
+.add {
+  background-color: #9db4c0;
+}
+
+.card.expense:hover,
+.card.add:hover {
+  cursor: pointer;
+}
+
+.primary {
+  font-size: large;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.card:hover {
+  overflow: visible;
+}
+
+.card:hover .primary {
+  background-color: white;
+}
+
+.secondary {
+  font-size: medium;
+  font-weight: 500;
+}
+
+.expense,
+.add {
+  color: #363636;
+}

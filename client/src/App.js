@@ -1,24 +1,39 @@
-import logo from './logo.svg';
+import React from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+
+import Layout from './components/Layout/Layout';
+import AuthPage from './pages/AuthPage';
+import ProfilePage from './pages/ProfilePage';
+import ExpensePage from './pages/ExpensePage';
+import GroupPage from './pages/GroupPage';
+
 import './App.css';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Switch>
+        <Route path='/' exact>
+          <Redirect to='/login' />
+        </Route>
+        <Route path='/login'>
+          <AuthPage />
+        </Route>
+        <Route path='/profile'>
+          <ProfilePage />
+        </Route>
+        <Route path='/groups'>
+          <GroupPage />
+        </Route>
+        <Route path='/expenses'>
+          <ExpensePage />
+        </Route>
+        <Route path='*'>
+          <Redirect to='/' />
+        </Route>
+      </Switch>
+    </Layout>
   );
 }
 

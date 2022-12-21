@@ -1,0 +1,32 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.input-section {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0px 10px 0px;
+}
+
+.input-section label {
+  font-size: large;
+  font-weight: 500;
+  width: 40%;
+}
+
+.input-section input {
+  width: 60%;
+}
+
+.input-section input[type=date] {
+  width: 13%;
+}
+
+.input-section textarea {
+  resize: none;
+  width: 60%;
+  height: 50px;
+}
+
