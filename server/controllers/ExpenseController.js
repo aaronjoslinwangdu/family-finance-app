@@ -9,8 +9,9 @@ const Expense = require('../models/ExpenseModel');
 const getExpenses = asyncHandler(async (req, res) => {
   
   const expenses = await Expense.find()
-  
+
   res.status(200).json(expenses);
+
 });
 
 // @desc    Set an expense
@@ -18,26 +19,58 @@ const getExpenses = asyncHandler(async (req, res) => {
 // @access  Private
 const setExpense = asyncHandler(async (req, res) => {
 
-  if (!req.body.text) {
+  // add additional validation here 
+
+  if (!req.body.title) {
     res.status(400)
     throw new Error('Please add a valid Expense');
   }
 
-  res.status(200).json({ message: 'Set Expense' });
+  const expense = await Expense.create({
+    title: req.body.title,
+    amount: req.body.amount,
+    description: req.body.description,
+    date: req.body.date,
+    category: req.body.category,
+  });
+
+  res.status(200).json(expense);
+
 });
 
 // @desc    Update an expense
 // @route   PUT /api/expenses/:id
 // @access  Private
-const updateExpense = asyncHandler( async (req, res) => {
-  res.status(200).json({ message: `Update Expense ${req.params.id}` });
+const updateExpense = asyncHandler(async (req, res) => {
+
+  const expense = await Expense.findById(req.params.id);
+
+  if (!expense) {
+    res.status(400);
+    throw new Error('Expense not found');
+  }
+
+  const updatedExpense = await Expense.findByIdAndUpdate(req.params.id, req.body, { new: true });
+
+  res.status(200).json(updatedExpense);
+
 });
 
 // @desc    Delete an expense
 // @route   GET /api/expenses/:id
 // @access  Private
-const deleteExpense = asyncHandler( async (req, res) => {
-  res.status(200).json({ message: `Delete Expense ${req.params.id}` });
+const deleteExpense = asyncHandler(async (req, res) => {
+  
+  const expense = await Expense.findById(req.params.id);
+
+  if (!expense) {
+    res.status(400);
+    throw new Error('Expense not found');
+  }
+
+  await expense.remove();
+
+  res.status(200).json({ id: req.params.id });
 });
 
 module.exports = {
