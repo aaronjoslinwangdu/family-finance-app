@@ -13,10 +13,16 @@ const ExpensePage = (props) => {
     dispatch(expensesActions.setShowExpenseForm(false));
   }
 
+  const showExpenseFormHandler = () => {
+    dispatch(expensesActions.setShowExpenseForm(true));
+  }
+
+
   return (
     <Fragment>
       <div>Expense Page</div>
-      <div onClick={hideExpenseFormHandler}>Click me to hide</div>
+      <div onClick={hideExpenseFormHandler}>Click me to hide form</div>
+      <div onClick={showExpenseFormHandler}>Click me to show form</div>
       {showExpenseForm && <ExpenseForm />}
       <ExpenseList />
     </Fragment>
