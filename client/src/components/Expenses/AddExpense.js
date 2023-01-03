@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import  { expensesActions } from '../../store/expenses-slice';
+import { expensesActions } from '../../store/expenses-slice';
+import classes from "./AddExpense.module.css";
 
 const AddExpense = (props) => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const AddExpense = (props) => {
 
   return (
     <div>
-      <div onClick={addExpenseHandler}>Add Expense</div>
+      <div className={classes.addExpense} onClick={addExpenseHandler}>+</div>
     </div>
   );
 };
