@@ -11,27 +11,3 @@ body {
   background-color: #253237;
   color: #f8f8f8;
 }
-
-/* Works on Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #5c6b73;
-}
-
-/* Works on Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-  width: 10px;
-}
-
-*::-webkit-scrollbar-track {
-  background: #5c6b73;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-}
-
-*::-webkit-scrollbar-thumb {
-  background: #ffffff;
-  border: solid 5px #5c6b73;
-  border-radius: 30px;
-}
-

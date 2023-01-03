@@ -15,7 +15,7 @@ const ExpenseList = (props) => {
       if (!response.ok) {
         return response.json()
           .then((data) => {
-            let errorMessage = 'Authentication Error';
+            let errorMessage = 'Error fetching expenses';
             throw new Error(errorMessage);
           });
       } else {

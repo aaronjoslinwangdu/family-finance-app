@@ -32,7 +32,7 @@ const ExpenseForm = (props) => {
         body: JSON.stringify({
           title: enteredTitle,
           amount: enteredAmount,
-          description: enteredDescription, 
+          description: enteredDescription,
           category: enteredCategory,
           date: enteredDate,
         }),
@@ -40,22 +40,22 @@ const ExpenseForm = (props) => {
           'Content-Type': 'application/json',
         }
       })
-        .then((response) => {
-          if (!response.ok) {
-            return response.json().then((data) => {
-              let errorMessage = 'Error adding expense';
-              throw new Error(errorMessage);
-            });
-          } else {
-            return response.json();
-          }
-        })
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((data) => {
+            let errorMessage = 'Error adding expense';
+            throw new Error(errorMessage);
+          });
+        } else {
+          return response.json();
+        }
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
     }
   }
 

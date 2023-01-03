@@ -20,7 +20,6 @@ const ExpensePage = (props) => {
 
   return (
     <Fragment>
-      <div>Expense Page</div>
       <div onClick={hideExpenseFormHandler}>Click me to hide form</div>
       <div onClick={showExpenseFormHandler}>Click me to show form</div>
       {showExpenseForm && <ExpenseForm />}
