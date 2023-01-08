@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialExpensesState = { 
-  expenses: [],
+  expenseList: [],
   showExpenseForm: false,
   isEditing: false,
 }
@@ -15,6 +15,12 @@ const expensesSlice = createSlice({
     },
     setShowExpenseForm(state, action) {
       state.showExpenseForm = action.payload;
+    },
+    setExpenseList(state, action) {
+      state.expenseList = action.payload;
+    },
+    addExpense(state, action) {
+      state.expenseList = [...state.expenseList, action.payload];
     }
   }
 });
