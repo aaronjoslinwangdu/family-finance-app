@@ -6,9 +6,10 @@ import ExpenseSublist from './ExpenseSublist';
 
 const ExpenseList = (props) => {
   // const dispatch = useDispatch();
-  //const props.expenses = useSelector(state => state.expenses.expenseList);
-  const [expenseSublists, setExpenseSublists] = useState([]);
-  const [expenseDates, setExpenseDates] = useState([]);
+  const expenseList = useSelector(state => state.expenses.expenseList);
+  // const [expenseSublists, setExpenseSublists] = useState([]);
+  // const [expenseDates, setExpenseDates] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
 
   // need to make list update when new expense is added
@@ -27,7 +28,7 @@ const ExpenseList = (props) => {
   //     }
   //   })
   //   .then((data) => {
-  //     dispatch(expensesActions.setprops.expenses(data));
+  //     dispatch(expensesActions.setexpenseList(data));
   //     // create object with date keys containing arrays of expense corresponding expense objects
   //     let expensesByDay = {};
   //     expensesByDay[data[0].date.slice(0,10)] = [data[0]];
@@ -43,8 +44,8 @@ const ExpenseList = (props) => {
 
   //     let expenseSublistsArr = [];
   //     let expenseDatesArr = [];
-  //     for (const [date, props.expenses] of Object.entries(expensesByDay)) {
-  //       expenseSublistsArr = [...expenseSublistsArr, props.expenses];
+  //     for (const [date, expenseList] of Object.entries(expensesByDay)) {
+  //       expenseSublistsArr = [...expenseSublistsArr, expenseList];
   //       expenseDatesArr = [...expenseDatesArr, date];
   //     }
 
@@ -70,29 +71,6 @@ const ExpenseList = (props) => {
   //   </div>
   // );
 
-
-  // create object with date keys containing arrays of expense corresponding expense objects
-  // let expensesByDay = {};
-  // expensesByDay[props.expenses[0].date.slice(0,10)] = [props.expenses[0]];
-
-  // for (let i = 1; i < props.expenses.length; i++) {
-  //   const expenseDate = props.expenses[i].date.slice(0,10);
-  //   if (!expensesByDay[expenseDate]) {
-  //     expensesByDay[expenseDate] = [props.expenses[i]];
-  //   } else {
-  //     expensesByDay[expenseDate].push(props.expenses[i]);
-  //   }
-  // }
-
-  // let expenseSublistsArr = [];
-  // let expenseDatesArr = [];
-  // for (const [date, list] of Object.entries(expensesByDay)) {
-  //   expenseSublistsArr = [...expenseSublistsArr, list];
-  //   expenseDatesArr = [...expenseDatesArr, date];
-  // }
-
-  // setExpenseDates(expenseDatesArr);
-  // setExpenseSublists(expenseSublistsArr);
 
   return (
     <div>
