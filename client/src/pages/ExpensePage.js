@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import ExpenseList from "../components/Expenses/ExpenseList";
 import ExpenseForm from "../components/Expenses/ExpenseForm";
 
-
 import { expensesActions } from "../store/expenses-slice";
 
 const ExpensePage = (props) => {
@@ -39,15 +38,14 @@ const ExpensePage = (props) => {
 
   }, [dispatch]);
 
-
-  // console.log(expenseList);
+  console.log(expenseList);
 
   return (
     <Fragment>
       <div onClick={hideExpenseFormHandler}>Click me to hide form</div>
       <div onClick={showExpenseFormHandler}>Click me to show form</div>
       {showExpenseForm && <ExpenseForm />}
-      <ExpenseList expenses={expenseList}/>
+      <ExpenseList />
     </Fragment>
   );
 };
