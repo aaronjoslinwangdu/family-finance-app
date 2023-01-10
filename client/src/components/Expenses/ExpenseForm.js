@@ -1,8 +1,11 @@
 import { useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { expensesActions } from '../../store/expenses-slice';
 
 const ExpenseForm = (props) => {
+  const dispatch = useDispatch();
   const isEditing = useSelector(state => state.expenses.isEditing);
+  const expenseList = useSelector(state => state.expenses.expenseList);
 
   const titleInputRef = useRef();
   const amountInputRef = useRef();
@@ -51,7 +54,7 @@ const ExpenseForm = (props) => {
         }
       })
       .then((data) => {
-        console.log(data);
+        dispatch(expensesActions.addExpense(data));
       })
       .catch((error) => {
         alert(error.message);

@@ -71,6 +71,34 @@ const ExpenseList = (props) => {
   //   </div>
   // );
 
+  let expensesByDay = {};
+  expensesByDay[data[0].date.slice(0,10)] = [data[0]];
+
+  for (let i = 1; i < data.length; i++) {
+    const expenseDate = data[i].date.slice(0,10);
+    if (!expensesByDay[expenseDate]) {
+      expensesByDay[expenseDate] = [data[i]];
+    } else {
+      expensesByDay[expenseDate].push(data[i]);
+    }
+  }
+
+  let expenseSublistsArr = [];
+  let expenseDatesArr = [];
+  for (const [date, expenseList] of Object.entries(expensesByDay)) {
+    expenseSublistsArr = [...expenseSublistsArr, expenseList];
+    expenseDatesArr = [...expenseDatesArr, date];
+  }
+
+  setExpenseDates(expenseDatesArr);
+  setExpenseSublists(expenseSublistsArr);
+
+  let expenseSublistsArray = [];
+  for (let i = 0; i < expenseDates.length; i++) {
+    expenseSublistsArray = [...expenseSublistsArray, 
+      <ExpenseSublist key={i} expenses={expenseSublists[i]} date={expenseDates[i]}/>
+    ];
+  }
 
   return (
     <div>

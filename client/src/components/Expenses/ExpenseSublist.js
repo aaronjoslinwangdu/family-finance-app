@@ -12,7 +12,7 @@ const ExpenseSublist = (props) => {
       <div className={classes.expenseSublist}>
         {props.expenses.map(expense => (
           <ExpenseItem 
-            key={expense.id} 
+            key={expense._id} 
             title={expense.title}
             amount={expense.amount}
             description={expense.description}
