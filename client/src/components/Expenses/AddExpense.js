@@ -14,7 +14,7 @@ const AddExpense = (props) => {
 
   return (
     <div>
-      <div className={classes.addExpense} onClick={addExpenseHandler}>+</div>
+      <div className={classes.addExpense} onClick={addExpenseHandler}>Add</div>
     </div>
   );
 };
