@@ -20,14 +20,19 @@ const ExpensePage = (props) => {
   }
 
   useEffect(() => {
+    
     // declare async data fetch
     const fetchExpenses = async () => {
+      
       // fetch data
       const data = await fetch('http://localhost:5000/api/expenses');
+      
       // convert data
       const json = await data.json();
+      
       // set expenseList to data
       dispatch(expensesActions.setExpenseList(json));
+      
     }
 
     try {
@@ -38,7 +43,6 @@ const ExpensePage = (props) => {
 
   }, [dispatch]);
 
-  console.log(expenseList);
 
   return (
     <Fragment>
