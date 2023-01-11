@@ -91,7 +91,7 @@ const ExpenseForm = (props) => {
       </div>
       <div>
         <label htmlFor='category'>Category</label>
-        <input type='checkbox' id='category' defaultValue={categoryDefault} ref={categoryInputRef}></input>
+        <input type='text' id='category' defaultValue={categoryDefault} ref={categoryInputRef}></input>
       </div>
       <div>
         <label htmlFor='date'>Date</label>

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ExpenseList from "../components/Expenses/ExpenseList";
 import ExpenseForm from "../components/Expenses/ExpenseForm";
+import Modal from "../components/UI/Modal";
 
 import { expensesActions } from "../store/expenses-slice";
 
@@ -43,12 +44,17 @@ const ExpensePage = (props) => {
 
   }, [dispatch]);
 
+  const expenseForm = (
+    <Modal>
+      <ExpenseForm />
+    </Modal>
+  );
 
   return (
     <Fragment>
       <div onClick={hideExpenseFormHandler}>Click me to hide form</div>
       <div onClick={showExpenseFormHandler}>Click me to show form</div>
-      {showExpenseForm && <ExpenseForm />}
+      {showExpenseForm && expenseForm}
       <ExpenseList />
     </Fragment>
   );
