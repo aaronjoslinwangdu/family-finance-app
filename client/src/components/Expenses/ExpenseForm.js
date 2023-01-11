@@ -28,21 +28,56 @@ const ExpenseForm = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    const addIdHere = 'add id for editing existing expense here';
+    const enteredTitle = titleInputRef.current.value;
+    const enteredAmount = amountInputRef.current.value;
+    const enteredDescription = descriptionInputRef.current.value;
+    const enteredCategory = categoryInputRef.current.value;
+    const enteredDate = dateInputRef.current.value;
+    
     let url;
     if (isEditing) {
       // set url for logging in
-      //url = `http://localhost:5000/api/expenses/${addIdHere}`;
+      url = `http://localhost:5000/api/expenses/${currentExpense._id}`;
+
+      fetch(url, {
+        method: 'PUT',
+        body: JSON.stringify({
+          title: enteredTitle,
+          amount: enteredAmount,
+          description: enteredDescription,
+          category: enteredCategory,
+          date: enteredDate,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((data) => {
+            let errorMessage = 'Error updating expense';
+            throw new Error(errorMessage);
+          });
+        } else {
+          return response.json();
+        }
+      })
+      .then((data) => {
+        console.log('udpated expense');
+        console.log(data);
+
+        // NEED TO UPDATE THE EXPENSE LIST HERE 
+
+        dispatch(expensesActions.setIsEditing(false));
+        dispatch(expensesActions.setShowExpenseForm(false));
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+
     } else {
       // set url for creating new expense
       url = 'http://localhost:5000/api/expenses';
-
-      const enteredTitle = titleInputRef.current.value;
-      const enteredAmount = amountInputRef.current.value;
-      const enteredDescription = descriptionInputRef.current.value;
-      const enteredCategory = categoryInputRef.current.value;
-      const enteredDate = dateInputRef.current.value;
-
       fetch(url, {
         method: 'POST',
         body: JSON.stringify({
@@ -68,6 +103,8 @@ const ExpenseForm = (props) => {
       })
       .then((data) => {
         dispatch(expensesActions.addExpense(data));
+        dispatch(expensesActions.setIsEditing(false));
+        dispatch(expensesActions.setShowExpenseForm(false));
       })
       .catch((error) => {
         alert(error.message);
