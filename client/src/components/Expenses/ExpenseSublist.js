@@ -13,10 +13,7 @@ const ExpenseSublist = (props) => {
         {props.expenses.map(expense => (
           <ExpenseItem 
             key={expense._id} 
-            title={expense.title}
-            amount={expense.amount}
-            description={expense.description}
-            category={expense.category}
+            expense={expense}
           />
         ))}
       </div>

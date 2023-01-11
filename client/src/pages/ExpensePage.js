@@ -20,7 +20,7 @@ const ExpensePage = (props) => {
   }
 
   useEffect(() => {
-    
+
     // declare async data fetch
     const fetchExpenses = async () => {
       

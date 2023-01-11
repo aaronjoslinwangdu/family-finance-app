@@ -4,6 +4,7 @@ const initialExpensesState = {
   expenseList: [],
   showExpenseForm: false,
   isEditing: false,
+  currentExpense: {},
 }
 
 const expensesSlice = createSlice({
@@ -21,6 +22,9 @@ const expensesSlice = createSlice({
     },
     addExpense(state, action) {
       state.expenseList = [...state.expenseList, action.payload];
+    },
+    setCurrentExpense(state, action) {
+      state.currentExpense = action.payload;
     }
   }
 });

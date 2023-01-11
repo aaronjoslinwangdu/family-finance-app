@@ -5,7 +5,7 @@ import { expensesActions } from '../../store/expenses-slice';
 const ExpenseForm = (props) => {
   const dispatch = useDispatch();
   const isEditing = useSelector(state => state.expenses.isEditing);
-  const expenseList = useSelector(state => state.expenses.expenseList);
+  const currentExpense = useSelector(state => state.expenses.currentExpense);
 
   const titleInputRef = useRef();
   const amountInputRef = useRef();
@@ -13,13 +13,26 @@ const ExpenseForm = (props) => {
   const categoryInputRef = useRef();
   const dateInputRef = useRef();
 
+
+  if (isEditing) {
+    console.log(currentExpense);
+  }
+
+  const titleDefault = isEditing ? currentExpense.title : '';
+  const amountDefault = isEditing ? currentExpense.amount : '';
+  const descriptionDefault = isEditing ? currentExpense.description : '';
+  const categoryDefault = isEditing ? currentExpense.category : '';
+
+  // format this date to work and also set current date of sublist if coming from that button
+  const dateDefault = isEditing ? currentExpense.date : '';
+
   const submitHandler = (event) => {
     event.preventDefault();
     const addIdHere = 'add id for editing existing expense here';
     let url;
     if (isEditing) {
       // set url for logging in
-      url = `http://localhost:5000/api/expenses/${addIdHere}`;
+      //url = `http://localhost:5000/api/expenses/${addIdHere}`;
     } else {
       // set url for creating new expense
       url = 'http://localhost:5000/api/expenses';
@@ -66,23 +79,23 @@ const ExpenseForm = (props) => {
     <form onSubmit={submitHandler}>
       <div>
         <label htmlFor='title'>Title</label>
-        <input type='text' id='title' required ref={titleInputRef}></input>
+        <input type='text' id='title' defaultValue={titleDefault} required ref={titleInputRef}></input>
       </div>
       <div>
         <label htmlFor='amount'>Amount</label>
-        <input type='number' id='amount' required ref={amountInputRef}></input>
+        <input type='number' id='amount' defaultValue={amountDefault} required ref={amountInputRef}></input>
       </div>
       <div>
         <label htmlFor='description'>Description</label>
-        <input type='text' id='description' ref={descriptionInputRef}></input>
+        <input type='text' id='description' defaultValue={descriptionDefault} ref={descriptionInputRef}></input>
       </div>
       <div>
         <label htmlFor='category'>Category</label>
-        <input type='checkbox' id='category' ref={categoryInputRef}></input>
+        <input type='checkbox' id='category' defaultValue={categoryDefault} ref={categoryInputRef}></input>
       </div>
       <div>
         <label htmlFor='date'>Date</label>
-        <input type='date' id='date' required ref={dateInputRef}></input>
+        <input type='date' id='date' defaultValue={dateDefault} required ref={dateInputRef}></input>
       </div>
       <button>{isEditing ? 'Save' : 'Create'}</button>
     </form>
