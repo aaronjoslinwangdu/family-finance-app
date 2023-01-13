@@ -35,81 +35,53 @@ const ExpenseForm = (props) => {
     const enteredDate = dateInputRef.current.value;
     
     let url;
+    let method;
     if (isEditing) {
-      // set url for logging in
       url = `http://localhost:5000/api/expenses/${currentExpense._id}`;
-
-      fetch(url, {
-        method: 'PUT',
-        body: JSON.stringify({
-          title: enteredTitle,
-          amount: enteredAmount,
-          description: enteredDescription,
-          category: enteredCategory,
-          date: enteredDate,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      })
-      .then((response) => {
-        if (!response.ok) {
-          return response.json().then((data) => {
-            let errorMessage = 'Error updating expense';
-            throw new Error(errorMessage);
-          });
-        } else {
-          return response.json();
-        }
-      })
-      .then((data) => {
-        console.log('udpated expense');
-        console.log(data);
-
-        // NEED TO UPDATE THE EXPENSE LIST HERE 
-
-        dispatch(expensesActions.setIsEditing(false));
-        dispatch(expensesActions.setShowExpenseForm(false));
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-
+      method = 'PUT';
     } else {
-      // set url for creating new expense
       url = 'http://localhost:5000/api/expenses';
-      fetch(url, {
-        method: 'POST',
-        body: JSON.stringify({
-          title: enteredTitle,
-          amount: enteredAmount,
-          description: enteredDescription,
-          category: enteredCategory,
-          date: enteredDate,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      })
-      .then((response) => {
-        if (!response.ok) {
-          return response.json().then((data) => {
-            let errorMessage = 'Error adding expense';
-            throw new Error(errorMessage);
-          });
-        } else {
-          return response.json();
-        }
-      })
-      .then((data) => {
-        dispatch(expensesActions.addExpense(data));
-        dispatch(expensesActions.setIsEditing(false));
-        dispatch(expensesActions.setShowExpenseForm(false));
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+      method = 'POST';
     }
+
+    // add or update expense
+    fetch(url, {
+      method: method,
+      body: JSON.stringify({
+        title: enteredTitle,
+        amount: enteredAmount,
+        description: enteredDescription,
+        category: enteredCategory,
+        date: enteredDate,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    .then((response) => {
+      if (!response.ok) {
+        return response.json().then((data) => {
+          let errorMessage = `Error sending ${method} request.`;
+          throw new Error(errorMessage);
+        });
+      } else {
+        return response.json();
+      }
+    })
+    .then((data) => {
+
+      if (isEditing) {
+        dispatch(expensesActions.updateExpense(data));
+      } else {
+        dispatch(expensesActions.addExpense(data));
+      }
+
+      dispatch(expensesActions.setIsEditing(false));
+      dispatch(expensesActions.setShowExpenseForm(false));
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
   }
 
   return (

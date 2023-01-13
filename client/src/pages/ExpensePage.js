@@ -33,7 +33,6 @@ const ExpensePage = (props) => {
       
       // set expenseList to data
       dispatch(expensesActions.setExpenseList(json));
-      
     }
 
     try {

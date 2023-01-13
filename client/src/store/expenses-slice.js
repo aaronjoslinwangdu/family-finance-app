@@ -25,6 +25,15 @@ const expensesSlice = createSlice({
     },
     setCurrentExpense(state, action) {
       state.currentExpense = action.payload;
+    },
+    updateExpense(state, action) {
+      // pretty unhappy with this
+      // potentially use keyed obj for expenseList and lookup will be constant rather than o(n)
+      for (let i = 0; i < state.expenseList.length; i++) {
+        if (state.expenseList[i]._id === action.payload._id) {
+          state.expenseList[i] = action.payload;
+        }
+      }
     }
   }
 });
