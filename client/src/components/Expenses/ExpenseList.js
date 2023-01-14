@@ -21,19 +21,6 @@ const ExpenseList = (props) => {
       }
     }
 
-    // let expensesByDay = {};
-    // const firstExpense = expenseList[Object.keys(expenseList)[0]];
-    // expensesByDay[firstExpense.date.slice(0,10)] = [firstExpense];
-
-    // for (const [id, expense] of Object.entries(expenseList)) {
-    //   const expenseDate = expense.date.slice(0,10);
-    //   if (!expensesByDay[expenseDate]) {
-    //     expensesByDay[expenseDate] = [expense];
-    //   } else {
-    //     expensesByDay[expenseDate].push(expense);
-    //   }
-    // }
-
     let expenseSublistsArr = [];
     let expenseDatesArr = [];
     for (const [date, list] of Object.entries(expensesByDay)) {
