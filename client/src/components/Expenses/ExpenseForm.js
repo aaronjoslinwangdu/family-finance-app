@@ -13,11 +13,6 @@ const ExpenseForm = (props) => {
   const categoryInputRef = useRef();
   const dateInputRef = useRef();
 
-
-  if (isEditing) {
-    console.log(currentExpense);
-  }
-
   const titleDefault = isEditing ? currentExpense.title : '';
   const amountDefault = isEditing ? currentExpense.amount : '';
   const descriptionDefault = isEditing ? currentExpense.description : '';
@@ -109,7 +104,7 @@ const ExpenseForm = (props) => {
       </div>
       <div>
         <label htmlFor='amount'>Amount</label>
-        <input type='number' id='amount' defaultValue={amountDefault} required ref={amountInputRef}></input>
+        <input type='number' id='amount' min="0.00" step="0.01" defaultValue={amountDefault} required ref={amountInputRef}></input>
       </div>
       <div>
         <label htmlFor='description'>Description</label>
