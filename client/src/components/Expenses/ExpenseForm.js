@@ -22,9 +22,7 @@ const ExpenseForm = (props) => {
   const amountDefault = isEditing ? currentExpense.amount : '';
   const descriptionDefault = isEditing ? currentExpense.description : '';
   const categoryDefault = isEditing ? currentExpense.category : '';
-
-  // format this date to work and also set current date of sublist if coming from that button
-  const dateDefault = isEditing ? currentExpense.date : '';
+  const dateDefault = isEditing ? currentExpense.date.slice(0,10) : '';
 
   const submitHandler = (event) => {
     event.preventDefault();
