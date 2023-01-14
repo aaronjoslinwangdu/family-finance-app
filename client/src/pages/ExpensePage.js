@@ -20,15 +20,6 @@ const compareDates = (a, b) => {
 const ExpensePage = (props) => {
   const dispatch = useDispatch();
   const showExpenseForm = useSelector(state => state.expenses.showExpenseForm);
-  const expenseList = useSelector(state => state.expenses.expenseList);
-
-  const hideExpenseFormHandler = () => {
-    dispatch(expensesActions.setShowExpenseForm(false));
-  }
-
-  const showExpenseFormHandler = () => {
-    dispatch(expensesActions.setShowExpenseForm(true));
-  }
 
   useEffect(() => {
 
@@ -64,8 +55,6 @@ const ExpensePage = (props) => {
 
   return (
     <Fragment>
-      <div onClick={hideExpenseFormHandler}>Click me to hide form</div>
-      <div onClick={showExpenseFormHandler}>Click me to show form</div>
       {showExpenseForm && expenseForm}
       <ExpenseList />
     </Fragment>
