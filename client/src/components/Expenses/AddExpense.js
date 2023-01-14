@@ -15,7 +15,7 @@ const AddExpense = (props) => {
       category: '',
       date: props.date ? props.date : ''
     }
-    console.log(props.date);
+
     dispatch(expensesActions.setCurrentExpense(currentExpenseWithDate));
     dispatch(expensesActions.setShowExpenseForm(true));
     dispatch(expensesActions.setIsEditing(false))
