@@ -35,6 +35,20 @@ const ExpenseForm = (props) => {
     let url;
     let method;
     if (isEditing) {
+
+      // check if expense actually changed
+      if (
+        enteredTitle === currentExpense.title &&
+        enteredAmount === currentExpense.amount &&
+        enteredDescription === currentExpense.description &&
+        enteredCategory === currentExpense.category &&
+        enteredDate === currentExpense.date.slice(0,10)
+      ) { 
+        dispatch(expensesActions.setIsEditing(false));
+        dispatch(expensesActions.setShowExpenseForm(false));
+        return;
+      }
+
       url = `http://localhost:5000/api/expenses/${currentExpense._id}`;
       method = 'PUT';
     } else {
@@ -82,6 +96,11 @@ const ExpenseForm = (props) => {
     });
   }
 
+  const cancelHandler = (event) => {
+    event.preventDefault();
+    dispatch(expensesActions.setShowExpenseForm(false));
+  }
+
   return (
     <form onSubmit={submitHandler}>
       <div>
@@ -104,7 +123,8 @@ const ExpenseForm = (props) => {
         <label htmlFor='date'>Date</label>
         <input type='date' id='date' defaultValue={dateDefault} required ref={dateInputRef}></input>
       </div>
-      <button>{isEditing ? 'Save' : 'Create'}</button>
+      <button type="submit">{isEditing ? 'Save' : 'Create'}</button>
+      <button onClick={cancelHandler}>Cancel</button>
     </form>
   );
 };
