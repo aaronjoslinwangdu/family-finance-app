@@ -4,7 +4,13 @@ const initialExpensesState = {
   expenseList: [],
   showExpenseForm: false,
   isEditing: false,
-  currentExpense: {},
+  currentExpense: {
+    title: '',
+    amount: '',
+    description: '',
+    category: '',
+    date: ''
+  },
 }
 
 const expensesSlice = createSlice({

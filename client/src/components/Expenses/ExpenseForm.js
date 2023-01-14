@@ -13,11 +13,17 @@ const ExpenseForm = (props) => {
   const categoryInputRef = useRef();
   const dateInputRef = useRef();
 
-  const titleDefault = isEditing ? currentExpense.title : '';
-  const amountDefault = isEditing ? currentExpense.amount : '';
-  const descriptionDefault = isEditing ? currentExpense.description : '';
-  const categoryDefault = isEditing ? currentExpense.category : '';
-  const dateDefault = isEditing ? currentExpense.date.slice(0,10) : '';
+  // const titleDefault = isEditing ? currentExpense.title : '';
+  // const amountDefault = isEditing ? currentExpense.amount : '';
+  // const descriptionDefault = isEditing ? currentExpense.description : '';
+  // const categoryDefault = isEditing ? currentExpense.category : '';
+  // const dateDefault = isEditing ? currentExpense.date.slice(0,10) : '';
+
+  const titleDefault = currentExpense.title;
+  const amountDefault = currentExpense.amount;
+  const descriptionDefault = currentExpense.description;
+  const categoryDefault = currentExpense.category;
+  const dateDefault = currentExpense.date.slice(0,10);
 
   const submitHandler = (event) => {
     event.preventDefault();

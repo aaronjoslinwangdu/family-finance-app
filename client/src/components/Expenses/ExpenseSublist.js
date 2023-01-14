@@ -7,7 +7,7 @@ const ExpenseSublist = (props) => {
     <div className={classes.sublist}>
       <div className={classes.sublistHeader}>
         <header>{props.date}</header>
-        <AddExpense />
+        <AddExpense date={props.date} />
       </div>
       <div className={classes.expenseSublist}>
         {props.expenses.map(expense => (
