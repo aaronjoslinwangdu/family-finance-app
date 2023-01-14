@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import AddExpense from '../Expenses/AddExpense';
 
 import classes from './Navigation.module.css';
 
@@ -8,6 +9,9 @@ const Navigation = (props) => {
   return (
     <div className={classes.navigation}>
       <nav>
+        <ul>
+          <li><AddExpense /></li>
+        </ul>
         <ul>
           <li>
             <NavLink to='/expenses'>Expenses</NavLink>

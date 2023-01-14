@@ -13,7 +13,7 @@ const AddExpense = (props) => {
       amount: '',
       description: '',
       category: '',
-      date: props.date
+      date: props.date ? props.date : ''
     }
     console.log(props.date);
     dispatch(expensesActions.setCurrentExpense(currentExpenseWithDate));
