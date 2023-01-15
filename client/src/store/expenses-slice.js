@@ -4,6 +4,9 @@ const initialExpensesState = {
   expenseList: [],
   showExpenseForm: false,
   isEditing: false,
+  isSelecting: false,
+  isDeleting: false,
+  deleteExpenses: [],
   currentExpense: {
     title: '',
     amount: '',
@@ -40,6 +43,9 @@ const expensesSlice = createSlice({
           state.expenseList[i] = action.payload;
         }
       }
+    },
+    deleteExpenses(state, action) {
+      // delete all expenses in action array from expense list
     }
   }
 });

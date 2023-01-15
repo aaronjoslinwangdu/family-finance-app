@@ -1,16 +1,23 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+
 import AddExpense from '../Expenses/AddExpense';
+import SelectExpenses from '../Expenses/SelectExpenses';
 
 import classes from './Navigation.module.css';
 
 const Navigation = (props) => {
+
+  const selectHandler = () => {
+
+  }
 
   return (
     <div className={classes.navigation}>
       <nav>
         <ul>
           <li><AddExpense /></li>
+          <li><SelectExpenses /></li>
         </ul>
         <ul>
           <li>
