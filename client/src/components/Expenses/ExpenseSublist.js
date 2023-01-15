@@ -4,14 +4,21 @@ import classes from "./ExpenseSublist.module.css";
 
 const ExpenseSublist = (props) => {
 
-  const options = { year: 'numeric', month: 'numeric', day: 'numeric' }
-  let date = new Date(props.date);
-  date = date.toLocaleDateString("en-US", options);
+  let day = props.date.slice(8,10);
+  if (day.length === 2 && day[0] === '0') {
+    day = day[1];
+  }
+  let month = props.date.slice(5,7);
+  if (month.length === 2 && month[0] === '0') {
+    month = month[1];
+  }
+  const year = props.date.slice(0,4);
+  const fullDate = month + '/' + day + '/' + year;
 
   return (
     <div className={classes.sublist}>
       <div className={classes.sublistHeader}>
-        <header>{date}</header>
+        <header>{fullDate}</header>
         <AddExpense date={props.date} />
       </div>
       <div className={classes.expenseSublist}>
