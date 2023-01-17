@@ -6,7 +6,7 @@ const initialExpensesState = {
   isEditing: false,
   isSelecting: false,
   isDeleting: false,
-  deleteExpenses: [],
+  selectedExpenses: [],
   currentExpense: {
     title: '',
     amount: '',
@@ -46,6 +46,12 @@ const expensesSlice = createSlice({
     },
     deleteExpenses(state, action) {
       // delete all expenses in action array from expense list
+    },
+    addSelectedExpense(state, action) {
+      state.selectedExpenses = [... state.selectedExpenses, action.payload];
+    },
+    setIsSelecting(state, action) {
+      state.isSelecting = action.payload;
     }
   }
 });

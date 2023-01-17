@@ -12,6 +12,7 @@ const ExpenseItem = (props) => {
   const editExpenseHandler = () => {
     if (isSelecting) {
       // add expense to list of expenses to delete
+      dispatch(expensesActions.addSelectedExpense(props.expense));
       console.log('hi');
     } else {
       dispatch(expensesActions.setShowExpenseForm(true));

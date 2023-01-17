@@ -1,13 +1,19 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { expensesActions } from "../../store/expenses-slice";
+
+import classes from "./SelectExpenses.module.css";
 
 const SelectExpenses = () => {
+  const dispatch = useDispatch();
+  const isSelecting = useSelector(state => state.expenses.isSelecting);
 
   const selectHandler = () => {
-    console.log('hi from select');
+    dispatch(expensesActions.setIsSelecting(!isSelecting));
   }
 
   return (
-    <div onClick={selectHandler}>Select</div>
+    <div className={classes.selectExpenses} onClick={selectHandler}>Select</div>
   )
 }
 
