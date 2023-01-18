@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 
 import { expensesActions } from '../../store/expenses-slice';
@@ -7,13 +7,18 @@ import classes from "./ExpenseItem.module.css";
 const ExpenseItem = (props) => {
   const dispatch = useDispatch();
   const isSelecting = useSelector(state => state.expenses.isSelecting);
+  const [isSelected, setIsSelected] = useState(false);
   const amount = `$${props.expense.amount.toFixed(2)}`;
 
-  const editExpenseHandler = () => {
+  const clickExpenseHandler = () => {
     if (isSelecting) {
-      // add expense to list of expenses to delete
-      dispatch(expensesActions.addSelectedExpense(props.expense));
-      console.log('hi');
+      if (!isSelected) {
+        dispatch(expensesActions.addSelectedExpense(props.expense._id));
+        setIsSelected(true);
+      } else {
+        dispatch(expensesActions.deleteSelectedExpense(props.expense._id));
+        setIsSelected(false);
+      }
     } else {
       dispatch(expensesActions.setShowExpenseForm(true));
       dispatch(expensesActions.setIsEditing(true));
@@ -21,8 +26,19 @@ const ExpenseItem = (props) => {
     }
   }
 
+  let expenseClasses;
+  if (isSelecting && isSelected) {
+    expenseClasses = `${classes.expenseItem} ${classes.selecting} ${classes.selected}`;
+  } else if (isSelecting && !isSelected) {
+    expenseClasses = `${classes.expenseItem} ${classes.selecting}`;
+  } else if (!isSelecting && isSelected) {
+    expenseClasses = `${classes.expenseItem} ${classes.selected}`;
+  } else if (!isSelecting) {
+    expenseClasses = `${classes.expenseItem}`;
+  }
+
   return (
-    <div className={classes.expenseItem} onClick={editExpenseHandler}>
+    <div className={expenseClasses} onClick={clickExpenseHandler}>
       <div>{props.expense.title}</div>
       <div>{amount}</div>
     </div>
