@@ -50,7 +50,7 @@ const expensesSlice = createSlice({
     addSelectedExpense(state, action) {
       state.selectedExpenses = [...state.selectedExpenses, action.payload];
     },
-    deleteSelectedExpense(state, action) {
+    removeSelectedExpense(state, action) {
       // pretty unhappy with this
       // need to make constant lookup
       for (let i = 0; i < state.selectedExpenses.length; i++) {

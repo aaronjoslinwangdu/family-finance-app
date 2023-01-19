@@ -16,7 +16,7 @@ const ExpenseItem = (props) => {
         dispatch(expensesActions.addSelectedExpense(props.expense._id));
         setIsSelected(true);
       } else {
-        dispatch(expensesActions.deleteSelectedExpense(props.expense._id));
+        dispatch(expensesActions.removeSelectedExpense(props.expense._id));
         setIsSelected(false);
       }
     } else {
