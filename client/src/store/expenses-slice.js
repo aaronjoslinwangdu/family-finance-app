@@ -60,6 +60,9 @@ const expensesSlice = createSlice({
       }
     },
     setIsSelecting(state, action) {
+      if (action.payload === false) {
+        state.selectedExpenses = [];
+      }
       state.isSelecting = action.payload;
     }
   }
