@@ -5,7 +5,8 @@ import { expensesActions } from '../../store/expenses-slice';
 const ExpenseForm = (props) => {
   const dispatch = useDispatch();
   const isEditing = useSelector(state => state.expenses.isEditing);
-  const currentExpense = useSelector(state => state.expenses.currentExpense);
+  // const currentExpense = useSelector(state => state.expenses.currentExpense);
+  const selectedExpenses = useSelector(state => state.expenses.selectedExpenses);
 
   const titleInputRef = useRef();
   const amountInputRef = useRef();
@@ -19,11 +20,22 @@ const ExpenseForm = (props) => {
   // const categoryDefault = isEditing ? currentExpense.category : '';
   // const dateDefault = isEditing ? currentExpense.date.slice(0,10) : '';
 
-  const titleDefault = currentExpense.title;
-  const amountDefault = currentExpense.amount;
-  const descriptionDefault = currentExpense.description;
-  const categoryDefault = currentExpense.category;
-  const dateDefault = currentExpense.date.slice(0,10);
+  let currentExpense = {}
+  let titleDefault = '';
+  let amountDefault = '';
+  let descriptionDefault = '';
+  let categoryDefault = '';
+  let dateDefault = '';
+
+  if (selectedExpenses.length === 1 && selectedExpenses[0]) {
+    currentExpense = selectedExpenses[0];
+    titleDefault = currentExpense.title;
+    amountDefault = currentExpense.amount;
+    descriptionDefault = currentExpense.description;
+    categoryDefault = currentExpense.category;
+    dateDefault = currentExpense.date.slice(0,10);
+  }
+
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -91,6 +103,7 @@ const ExpenseForm = (props) => {
 
       dispatch(expensesActions.setIsEditing(false));
       dispatch(expensesActions.setShowExpenseForm(false));
+      dispatch(expensesActions.clearSelectedExpenses());
     })
     .catch((error) => {
       alert(error.message);
@@ -100,6 +113,7 @@ const ExpenseForm = (props) => {
   const cancelHandler = (event) => {
     event.preventDefault();
     dispatch(expensesActions.setShowExpenseForm(false));
+    dispatch(expensesActions.clearSelectedExpenses());
   }
 
   return (

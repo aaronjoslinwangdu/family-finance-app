@@ -11,7 +11,7 @@ const Modal = (props) => {
   const hideExpenseFormHandler = () => {
     dispatch(expensesActions.setShowExpenseForm(false));
     dispatch(expensesActions.setIsEditing(false));
-    dispatch(expensesActions.setCurrentExpense());
+    dispatch(expensesActions.clearSelectedExpenses());
   }
 
   const Backdrop = (props) => {

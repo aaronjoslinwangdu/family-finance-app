@@ -10,6 +10,9 @@ const SelectExpenses = () => {
 
   const selectHandler = () => {
     dispatch(expensesActions.setIsSelecting(!isSelecting));
+    if (!isSelecting) {
+      dispatch(expensesActions.clearSelectedExpenses());
+    }
   }
 
   return (

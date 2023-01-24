@@ -10,19 +10,22 @@ const ExpenseItem = (props) => {
   const [isSelected, setIsSelected] = useState(false);
   const amount = `$${props.expense.amount.toFixed(2)}`;
 
+
+  // NEED TO MAKE NON SELECTED ITEMS HIGHLIGHTED, ELSE NOT HIGHLIGHTED
+
   const clickExpenseHandler = () => {
     if (isSelecting) {
       if (!isSelected) {
-        dispatch(expensesActions.addSelectedExpense(props.expense._id));
+        dispatch(expensesActions.addSelectedExpense(props.expense));
         setIsSelected(true);
       } else {
-        dispatch(expensesActions.removeSelectedExpense(props.expense._id));
+        dispatch(expensesActions.removeSelectedExpense(props.expense));
         setIsSelected(false);
       }
     } else {
       dispatch(expensesActions.setShowExpenseForm(true));
       dispatch(expensesActions.setIsEditing(true));
-      dispatch(expensesActions.setCurrentExpense(props.expense));
+      dispatch(expensesActions.addSelectedExpense(props.expense))
     }
   }
 

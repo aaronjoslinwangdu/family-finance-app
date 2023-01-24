@@ -7,13 +7,6 @@ const initialExpensesState = {
   isSelecting: false,
   isDeleting: false,
   selectedExpenses: [],
-  currentExpense: {
-    title: '',
-    amount: '',
-    description: '',
-    category: '',
-    date: ''
-  },
 }
 
 const expensesSlice = createSlice({
@@ -31,9 +24,6 @@ const expensesSlice = createSlice({
     },
     addExpense(state, action) {
       state.expenseList = [...state.expenseList, action.payload];
-    },
-    setCurrentExpense(state, action) {
-      state.currentExpense = action.payload;
     },
     updateExpense(state, action) {
       // pretty unhappy with this
@@ -54,7 +44,7 @@ const expensesSlice = createSlice({
       // pretty unhappy with this
       // need to make constant lookup
       for (let i = 0; i < state.selectedExpenses.length; i++) {
-        if (state.selectedExpenses[i] === action.payload) {
+        if (state.selectedExpenses[i]._id === action.payload._id) {
           state.selectedExpenses.pop(i)
         }
       }
@@ -64,6 +54,9 @@ const expensesSlice = createSlice({
         state.selectedExpenses = [];
       }
       state.isSelecting = action.payload;
+    },
+    clearSelectedExpenses(state) {
+      state.selectedExpenses = [];
     }
   }
 });

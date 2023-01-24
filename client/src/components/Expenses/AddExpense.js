@@ -17,7 +17,7 @@ const AddExpense = (props) => {
     }
 
     dispatch(expensesActions.setIsSelecting(false));
-    dispatch(expensesActions.setCurrentExpense(currentExpenseWithDate));
+    dispatch(expensesActions.addSelectedExpense(currentExpenseWithDate));
     dispatch(expensesActions.setShowExpenseForm(true));
     dispatch(expensesActions.setIsEditing(false))
   }
