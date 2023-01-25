@@ -34,8 +34,9 @@ const expensesSlice = createSlice({
         }
       }
     },
-    deleteExpenses(state, action) {
-      // delete all expenses in action array from expense list
+    deleteExpense(state, action) {
+      let temp = state.expenseList.filter(expense => expense._id !== action.payload.id);
+      state.expenseList = temp;
     },
     addSelectedExpense(state, action) {
       state.selectedExpenses = [...state.selectedExpenses, action.payload];
@@ -44,7 +45,7 @@ const expensesSlice = createSlice({
       // pretty unhappy with this
       // need to make constant lookup
       for (let i = 0; i < state.selectedExpenses.length; i++) {
-        if (state.selectedExpenses[i]._id === action.payload._id) {
+        if (state.selectedExpenses[i]._id === action.payload.id) {
           state.selectedExpenses.pop(i)
         }
       }

@@ -1,5 +1,8 @@
 import { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
+import DeleteExpense from './DeleteExpense';
+
 import { expensesActions } from '../../store/expenses-slice';
 
 const ExpenseForm = (props) => {
@@ -140,6 +143,7 @@ const ExpenseForm = (props) => {
       </div>
       <button type="submit">{isEditing ? 'Save' : 'Create'}</button>
       <button onClick={cancelHandler}>Cancel</button>
+      {isEditing && <DeleteExpense /> }
     </form>
   );
 };

@@ -57,7 +57,7 @@ const updateExpense = asyncHandler(async (req, res) => {
 });
 
 // @desc    Delete an expense
-// @route   GET /api/expenses/:id
+// @route   DEL /api/expenses/:id
 // @access  Private
 const deleteExpense = asyncHandler(async (req, res) => {
   
