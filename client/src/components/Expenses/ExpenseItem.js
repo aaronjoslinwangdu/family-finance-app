@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 
 import { expensesActions } from '../../store/expenses-slice';
@@ -10,8 +10,11 @@ const ExpenseItem = (props) => {
   const [isSelected, setIsSelected] = useState(false);
   const amount = `$${props.expense.amount.toFixed(2)}`;
 
-
-  // NEED TO MAKE NON SELECTED ITEMS HIGHLIGHTED, ELSE NOT HIGHLIGHTED
+  useEffect(() => {
+    if (!isSelecting) {
+      setIsSelected(false);
+    }
+  }, [isSelecting]);
 
   const clickExpenseHandler = () => {
     if (isSelecting) {
