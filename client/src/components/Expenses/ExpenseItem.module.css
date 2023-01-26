@@ -1,8 +1,9 @@
 .expenseItem {
   height: 100px;
   width: 100px;
-  background-color: red;
+  background-color: #bae9c4;
   margin: 10px;
+  border: 2px solid #a0d3ab;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -11,15 +12,17 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+	transform: scale(1);
 }
 
 .selecting {
-  background-color: lightblue;
+  animation: pulse 2s infinte;
 } 
 
 .selected {
-  border-style: solid;
-  border-color: black;
+  background-color: #94caa0;
+  border: 2px solid #5c8f67;
 }
 
 .expenseItem:hover {

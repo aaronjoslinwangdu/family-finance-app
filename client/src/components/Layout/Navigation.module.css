@@ -1,19 +1,22 @@
 .navigation {
-  background-color: rgb(189, 183, 209);
+  background-color: #EAEAEA;
   width: 100%;
   height: 7vh;
-  padding: 5px 20px 5px 20px;
+  padding: 0px 20px 0px 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  border-bottom: solid black 2px;
 }
 
 .navigation nav {
   display: flex;
   flex-direction: row;
   width: 100%;
+  height: 100%;
   justify-content: space-between;
+  align-items: center;
 }
 
 .navigation nav ul {

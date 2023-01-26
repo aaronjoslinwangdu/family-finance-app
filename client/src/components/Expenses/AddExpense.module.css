@@ -1,7 +1,3 @@
-.addExpense {
-  margin-left: 10px;
-}
-
 .addExpense:hover {
   cursor: pointer;
 }

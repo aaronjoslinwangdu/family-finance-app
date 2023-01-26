@@ -1,9 +1,36 @@
-.buttons {
+.inputSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputSubsection {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.inputSection .inputSubsection label {
+  font-weight: 700;
+  width: 15%;
+}
+
+.inputSection .inputSubsection input {
+  width: 30%;
+}
+
+.buttonSection {
+  margin-top: 5px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
 }
 
-.buttons Button {
-  margin-left: 5px;
+.buttonSection button {
+  margin-right: 5px;
+}
+
+.buttonSection button:hover {
+  cursor: pointer;
 }

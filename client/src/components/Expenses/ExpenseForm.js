@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import DeleteExpense from './DeleteExpense';
 
 import { expensesActions } from '../../store/expenses-slice';
+import classes from './ExpenseForm.module.css';
 
 const ExpenseForm = (props) => {
   const dispatch = useDispatch();
@@ -121,29 +122,33 @@ const ExpenseForm = (props) => {
 
   return (
     <form onSubmit={submitHandler}>
-      <div>
-        <label htmlFor='title'>Title</label>
-        <input type='text' id='title' defaultValue={titleDefault} required ref={titleInputRef}></input>
+      <div className={classes.inputSection}>
+        <div className={classes.inputSubsection}>
+          <label htmlFor='title'>Title</label>
+          <input type='text' id='title' defaultValue={titleDefault} required ref={titleInputRef}></input>
+        </div>
+        <div className={classes.inputSubsection}>
+          <label htmlFor='amount'>Amount</label>
+          <input type='number' id='amount' min="0.00" step="0.01" defaultValue={amountDefault} required ref={amountInputRef}></input>
+        </div>
+        <div className={classes.inputSubsection}>
+          <label htmlFor='description'>Description</label>
+          <input type='text' id='description' defaultValue={descriptionDefault} ref={descriptionInputRef}></input>
+        </div>
+        <div className={classes.inputSubsection}>
+          <label htmlFor='category'>Category</label>
+          <input type='text' id='category' defaultValue={categoryDefault} ref={categoryInputRef}></input>
+        </div>
+        <div className={classes.inputSubsection}>
+          <label htmlFor='date'>Date</label>
+          <input type='date' id='date' defaultValue={dateDefault} required ref={dateInputRef}></input>
+        </div>
       </div>
-      <div>
-        <label htmlFor='amount'>Amount</label>
-        <input type='number' id='amount' min="0.00" step="0.01" defaultValue={amountDefault} required ref={amountInputRef}></input>
+      <div className={classes.buttonSection}>
+        <button type="submit">{isEditing ? 'Save' : 'Create'}</button>
+        <button onClick={cancelHandler}>Cancel</button>
+        {isEditing && <DeleteExpense />}
       </div>
-      <div>
-        <label htmlFor='description'>Description</label>
-        <input type='text' id='description' defaultValue={descriptionDefault} ref={descriptionInputRef}></input>
-      </div>
-      <div>
-        <label htmlFor='category'>Category</label>
-        <input type='text' id='category' defaultValue={categoryDefault} ref={categoryInputRef}></input>
-      </div>
-      <div>
-        <label htmlFor='date'>Date</label>
-        <input type='date' id='date' defaultValue={dateDefault} required ref={dateInputRef}></input>
-      </div>
-      <button type="submit">{isEditing ? 'Save' : 'Create'}</button>
-      <button onClick={cancelHandler}>Cancel</button>
-      {isEditing && <DeleteExpense /> }
     </form>
   );
 };
