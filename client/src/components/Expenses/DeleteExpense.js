@@ -53,9 +53,9 @@ const DeleteExpense = (props) => {
   // TODO: STYLE THIS BUTTON AND FORM
 
   return (
-    <div onClick={deleteSelectedExpensesHandler}>
+    <button onClick={deleteSelectedExpensesHandler}>
       Delete
-    </div>
+    </button>
   );
 };
 

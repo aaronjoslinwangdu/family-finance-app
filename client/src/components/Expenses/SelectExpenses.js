@@ -16,9 +16,9 @@ const SelectExpenses = () => {
   }
 
   return (
-    <div className={classes.selectExpenses} onClick={selectHandler}>
+    <button className={classes.selectExpenses} onClick={selectHandler}>
       {isSelecting ? 'Selecting' : 'Select'}
-    </div>
+    </button>
   )
 }
 
