@@ -4,6 +4,7 @@ const port = process.env.PORT || 5000;
 const connectDatabase = require('./config/db');
 const { errorHandler } = require('./middleware/ErrorMiddleware');
 const cors = require('cors');
+const bodyparser = require("body-parser");
 
 connectDatabase();
 
@@ -19,5 +20,8 @@ app.use('/api/expenses', require('./routes/ExpenseRoutes'));
 app.use('/api/users', require('./routes/UserRoutes'));
 
 app.use(errorHandler);
+
+app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.json());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
