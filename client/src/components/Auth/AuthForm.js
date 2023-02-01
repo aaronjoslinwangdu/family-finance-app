@@ -21,24 +21,22 @@ const AuthForm = () => {
 
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
-    const enteredUsername = usernameInputRef.current.value;
-    const enteredFirstName = firstNameInputRef.current.value;
-    const enteredLastName = lastNameInputRef.current.value;
     
-    let url;
-    let method;
+    let url; 
     let userAuthInfo;
+
     if (isLogin) {
-      // set url for logging in
-      url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_WEB_API_KEY}`;
-      method = 'PUT';
-      // login info
-      userAuthInfo = {}
+      url = 'http://localhost:5000/api/users/login';
+      userAuthInfo = {
+        email: enteredEmail,
+        password: enteredPassword
+      }
 
     } else {
-      // set url for creating new account
-      url = `http://localhost:5000/api/users`;
-      method = 'POST';
+      const enteredUsername = usernameInputRef.current.value;
+      const enteredFirstName = firstNameInputRef.current.value;
+      const enteredLastName = lastNameInputRef.current.value;
+      url = 'http://localhost:5000/api/users';
       userAuthInfo = {
         username: enteredUsername,
         email: enteredEmail,
@@ -50,7 +48,7 @@ const AuthForm = () => {
 
 
     fetch(url, {
-      method,
+      method: 'POST',
       body: JSON.stringify(userAuthInfo),
       headers: {
         'Content-Type': 'application/json',
@@ -107,8 +105,8 @@ const AuthForm = () => {
   } else {
     mainCredentials = (
       <div>
-        <label htmlFor='username'>Username or Email</label>
-        <input type='text' id='username' required ref={usernameInputRef}></input>
+        <label htmlFor='email'>Email</label>
+        <input type='email' id='email' required ref={emailInputRef}></input>
     </div>
     );
   }
