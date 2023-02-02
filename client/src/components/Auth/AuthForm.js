@@ -31,7 +31,6 @@ const AuthForm = () => {
         email: enteredEmail,
         password: enteredPassword
       }
-
     } else {
       const enteredUsername = usernameInputRef.current.value;
       const enteredFirstName = firstNameInputRef.current.value;
@@ -65,6 +64,7 @@ const AuthForm = () => {
       }
     })
     .then((data) => {
+      localStorage.setItem('accessToken', data.accessToken);
       history.replace('/profile');
     })
     .catch((error) => {

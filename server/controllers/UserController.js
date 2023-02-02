@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const User = require('../models/UserModel');
@@ -20,8 +21,6 @@ const getUser = asyncHandler(async (req, res) => {
 // @access  Private
 const createUser = asyncHandler(async (req, res) => {
 
-  console.log(req.body);
-
   const takenUsername = await User.findOne({username: req.body.username});
   const takenEmail = await User.findOne({email: req.body.email});
 
@@ -39,9 +38,18 @@ const createUser = asyncHandler(async (req, res) => {
       lastName: req.body.lastName,
       profilePictureUrl: req.body.profilePictureUrl
     });
-  
-    res.status(200).json(user);
 
+    const token = jwt.sign({
+      id: user._id
+    }, process.env.API_SECRET, {
+      expiresIn: 86400
+    });
+  
+    res.status(200).send({
+      user, 
+      message: 'Account creation successful',
+      accessToken: token
+    });
   }
 });
 
