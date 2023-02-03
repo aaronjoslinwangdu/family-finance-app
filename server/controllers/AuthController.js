@@ -31,6 +31,20 @@ const signIn = asyncHandler(async (req, res) => {
 
 });
 
+
+const isAuthenticated = asyncHandler(async (req, res) => {
+  const token = req.accessToken;
+  console.log(token);
+  if (token) {
+    jwt.verify(token, process.env.API_SECRET, () => {
+      res.status(200).end();
+    });
+  } else {
+    res.status(404).send("Invalid token");
+  }
+});
+
 module.exports = {
-  signIn
+  signIn,
+  isAuthenticated
 }
