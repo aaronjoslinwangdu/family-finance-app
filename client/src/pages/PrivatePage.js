@@ -9,7 +9,7 @@ const PrivatePage = (props) => {
   // check if user is authenticated
   useEffect(() => {
 
-    fetch('/private', {
+    fetch('http://localhost:5000/api/users/private', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

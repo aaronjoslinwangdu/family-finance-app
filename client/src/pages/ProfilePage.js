@@ -1,9 +1,10 @@
+import PrivatePage from "./PrivatePage";
 
 const ProfilePage = (props) => {
   
 
   return (
-    <div>Profile Page</div>
+    <PrivatePage>Profile Page</PrivatePage>
   );
 };
 

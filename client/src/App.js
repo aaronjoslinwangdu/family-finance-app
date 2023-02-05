@@ -20,7 +20,7 @@ function App() {
         <Route path='/users/login'>
           <AuthPage />
         </Route>
-        <Route path='/profile'>
+        <Route path='/users/profile'>
           <ProfilePage />
         </Route>
         <Route path='/groups'>
