@@ -1,9 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import classes from '../Expenses/ExpenseForm.module.css';
+
 const AuthForm = () => {
   const history = useHistory();
-  const [isLogin, setIsLogin] = useState();
+  const [isLogin, setIsLogin] = useState(true);
 
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
@@ -78,11 +80,11 @@ const AuthForm = () => {
   if (!isLogin) {
     mainCredentials = (
       <React.Fragment>
-        <div>
+        <div className={classes.inputSubsection}>
           <label htmlFor='username'>Username</label>
           <input type='text' id='username' required ref={usernameInputRef}></input>
         </div>
-        <div>
+        <div className={classes.inputSubsection}>
           <label htmlFor='email'>Email</label>
           <input type='email' id='email' required ref={emailInputRef}></input>
         </div>
@@ -91,11 +93,11 @@ const AuthForm = () => {
 
     userInfo = (
       <React.Fragment>
-        <div>
+        <div className={classes.inputSubsection}>
           <label htmlFor='firstName'>First Name</label>
           <input type='text' id='firstName' required ref={firstNameInputRef}></input>
         </div>
-        <div>
+        <div className={classes.inputSubsection}>
           <label htmlFor='lastName'>Last Name</label>
           <input type='text' id='lastName' required ref={lastNameInputRef}></input>
         </div>
@@ -104,7 +106,7 @@ const AuthForm = () => {
 
   } else {
     mainCredentials = (
-      <div>
+      <div className={classes.inputSubsection}>
         <label htmlFor='email'>Email</label>
         <input type='email' id='email' required ref={emailInputRef}></input>
     </div>
@@ -115,18 +117,22 @@ const AuthForm = () => {
     <section>
       <h1>Welcome to Family Finance</h1>
       <form onSubmit={submitHandler}>
-        {mainCredentials}
-        <div>
-          <label htmlFor='password'>Password</label>
-          <input type='password' id='password' required ref={passwordInputRef}></input>
+        <div className={classes.inputSection}>
+          {mainCredentials}
+          <div className={classes.inputSubsection}>
+            <label htmlFor='password'>Password</label>
+            <input type='password' id='password' required ref={passwordInputRef}></input>
+          </div>
+          {!isLogin && userInfo}
         </div>
-        {!isLogin && userInfo}
-        <button>{isLogin ? 'Login' : 'Create Account'}</button>
-        <button
-          type='button'
-          onClick={changeAuthTypeHandler}>
-          {isLogin ? 'Create New Account' : 'Login With Existing Account'}
-        </button>
+        <div className={classes.buttonSection}>
+          <button>{isLogin ? 'Login' : 'Create Account'}</button>
+          <button
+            type='button'
+            onClick={changeAuthTypeHandler}>
+            {isLogin ? 'Create New Account' : 'Login With Existing Account'}
+          </button>
+        </div>
       </form>
     </section>
   );
