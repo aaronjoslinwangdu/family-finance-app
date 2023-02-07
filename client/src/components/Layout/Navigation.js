@@ -29,10 +29,10 @@ const Navigation = (props) => {
           <NavLink to='/groups'>Groups</NavLink>
           </li>
           <li>
-          <NavLink to='/profile'>Profile</NavLink>
+          <NavLink to='/users/profile'>Profile</NavLink>
           </li>
           <li>
-          <NavLink to='/login'>Login</NavLink>
+          <NavLink to='/users/login'>Login</NavLink>
           </li>
         </ul>
       </nav>
