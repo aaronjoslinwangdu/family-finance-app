@@ -36,15 +36,15 @@ const signIn = asyncHandler(async (req, res) => {
 
 
 // @desc    Sign users out
-// @route   POST /api/auth/logout
+// @route   POST /auth/logout
 // @access  Public
 const signOut = asyncHandler(async (req, res) => {
 
 });
 
 
-// @desc    Update an expense
-// @route   PUT /api/expenses/:id
+// @desc    Refresh token
+// @route   GET /auth/refresh
 // @access  Public
 const refresh = asyncHandler(async (req, res) => {
 
@@ -52,8 +52,8 @@ const refresh = asyncHandler(async (req, res) => {
 
 
 // @desc    Check if a token is valid
-// @route   POST /api/auth/
-// @access  Private
+// @route   POST /auth/validate
+// @access  Public
 const isAuthenticated = asyncHandler(async (req, res) => {
   const token = req.accessToken;
   console.log(token);
