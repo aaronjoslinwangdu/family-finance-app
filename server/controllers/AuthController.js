@@ -3,6 +3,9 @@ const bcrypt = require('bcrypt');
 const User = require('../models/UserModel');
 const asyncHandler = require('express-async-handler');
 
+// @desc    Sign user in.
+// @route   POST /api/auth/
+// @access  Public
 const signIn = asyncHandler(async (req, res) => {
   const user = await User.findOne({email: req.body.email});
 
@@ -32,15 +35,37 @@ const signIn = asyncHandler(async (req, res) => {
 });
 
 
+// @desc    Sign users out
+// @route   POST /api/auth/logout
+// @access  Public
+const signOut = asyncHandler(async (req, res) => {
+
+});
+
+
+// @desc    Update an expense
+// @route   PUT /api/expenses/:id
+// @access  Public
+const refresh = asyncHandler(async (req, res) => {
+
+});
+
+
+// @desc    Check if a token is valid
+// @route   POST /api/auth/
+// @access  Private
 const isAuthenticated = asyncHandler(async (req, res) => {
   const token = req.accessToken;
   console.log(token);
   if (token) {
-    jwt.verify(token, process.env.API_SECRET, () => {
-      res.status(200).end();
+    jwt.verify(token, process.env.API_SECRET, (err, decoded) => {
+      if (err) {
+        throw new Error(err);
+        res.status(404).send("Invalid token");
+      } else {
+        res.status(200).end();
+      }
     });
-  } else {
-    res.status(404).send("Invalid token");
   }
 });
 

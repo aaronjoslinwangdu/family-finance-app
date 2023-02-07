@@ -18,6 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/expenses', require('./routes/ExpenseRoutes'));
 app.use('/api/users', require('./routes/UserRoutes'));
+app.use('/auth', require('./routes/AuthRoutes'));
 
 app.use(errorHandler);
 
