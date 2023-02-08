@@ -7,31 +7,47 @@ const asyncHandler = require('express-async-handler');
 // @route   POST /api/auth/
 // @access  Public
 const signIn = asyncHandler(async (req, res) => {
-  const user = await User.findOne({email: req.body.email});
+
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and Password are required to sign in' });
+  }
+
+  const user = await User.findOne({ email }).exec();
 
   if (!user) {
-    res.status(400);
-    throw new Error('User not found');
+    return res.status(401).json({ message: 'User not found' });
   }
 
-  const validPassword = bcrypt.compareSync(req.body.password, user.password);
+  const validPassword = bcrypt.compareSync(password, user.password);
   if (!validPassword) {
-    res.status(401);
-    throw new Error('Invalid password')
+    return res.status(401).json({ message: 'Invalid password' });
   }
 
-  const token = jwt.sign({
-    id: user._id
-  }, process.env.API_SECRET, {
-    expiresIn: 86400
+  // create access token
+  const accessToken = jwt.sign(
+    { id: user._id }, 
+    process.env.ACCESS_TOKEN_SECRET, 
+    { expiresIn: '15m' }
+  );
+
+  // create refresh token
+  const refreshToken = jwt.sign(
+    { id: user._id }, 
+    process.env.REFRESH_TOKEN_SECRET, 
+    { expiresIn: '1d' }
+  );
+
+  // create cookie with refresh token
+  res.cookie('jwt', refreshToken, {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'None',
+    maxAge: 24 * 60 * 60 * 1000
   });
 
-  res.status(200).send({
-    user, 
-    message: 'Sign in successful',
-    accessToken: token
-  });
-
+  res.json({ accessToken });
 });
 
 
