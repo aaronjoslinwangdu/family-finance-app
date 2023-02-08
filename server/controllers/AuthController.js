@@ -15,7 +15,6 @@ const signIn = asyncHandler(async (req, res) => {
   }
 
   const user = await User.findOne({ email }).exec();
-
   if (!user) {
     return res.status(401).json({ message: 'User not found' });
   }
@@ -63,6 +62,42 @@ const signOut = asyncHandler(async (req, res) => {
 // @route   GET /auth/refresh
 // @access  Public
 const refresh = asyncHandler(async (req, res) => {
+
+  const cookies = req.cookies;
+
+  if (!cookies?.jwt) {
+    return res.status(401).json({ message: 'No cookies' });
+  }
+
+  const refreshToken = cookies.jwt;
+
+  jwt.verify(
+    refreshToken,
+    process.env.REFRESH_TOKEN_SECRET,
+    asyncHandler(async (err, decoded) => {
+      
+      // error checking
+      if (err) {
+        return res.status(403).json({ message: 'Unauthorized' });
+      }
+
+      // check for user
+      const user = await User.findOne({ email }).exec();
+      if (!user) {
+        return res.status(401).json({ message: 'User not found' });
+      }
+
+      // create access token
+      const accessToken = jwt.sign(
+        { id: user._id }, 
+        process.env.ACCESS_TOKEN_SECRET, 
+        { expiresIn: '15m' }
+      );
+
+      res.json({ accessToken });
+
+    })
+  )
 
 });
 
