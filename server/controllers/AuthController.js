@@ -55,6 +55,19 @@ const signIn = asyncHandler(async (req, res) => {
 // @access  Public
 const signOut = asyncHandler(async (req, res) => {
 
+  const cookies = req.cookies;
+  if (!cookies?.jwt) {
+    return res.status(204);
+  }
+
+  res.clearCookie('jwt', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'None'
+  });
+
+  res.json({ message: 'Cookie cleared' });
+
 });
 
 
@@ -64,7 +77,6 @@ const signOut = asyncHandler(async (req, res) => {
 const refresh = asyncHandler(async (req, res) => {
 
   const cookies = req.cookies;
-
   if (!cookies?.jwt) {
     return res.status(401).json({ message: 'No cookies' });
   }
@@ -101,26 +113,8 @@ const refresh = asyncHandler(async (req, res) => {
 
 });
 
-
-// @desc    Check if a token is valid
-// @route   POST /auth/validate
-// @access  Public
-const isAuthenticated = asyncHandler(async (req, res) => {
-  const token = req.accessToken;
-  console.log(token);
-  if (token) {
-    jwt.verify(token, process.env.API_SECRET, (err, decoded) => {
-      if (err) {
-        throw new Error(err);
-        res.status(404).send("Invalid token");
-      } else {
-        res.status(200).end();
-      }
-    });
-  }
-});
-
 module.exports = {
   signIn,
-  isAuthenticated
+  signOut,
+  refresh
 }
