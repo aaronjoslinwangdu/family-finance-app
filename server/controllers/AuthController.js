@@ -26,14 +26,18 @@ const signIn = asyncHandler(async (req, res) => {
 
   // create access token
   const accessToken = jwt.sign(
-    { id: user._id }, 
+    { 
+      'UserInfo': {
+        'id': user._id
+      }
+    }, 
     process.env.ACCESS_TOKEN_SECRET, 
     { expiresIn: '15m' }
   );
 
   // create refresh token
   const refreshToken = jwt.sign(
-    { id: user._id }, 
+    { 'id': user._id }, 
     process.env.REFRESH_TOKEN_SECRET, 
     { expiresIn: '1d' }
   );
@@ -101,7 +105,11 @@ const refresh = asyncHandler(async (req, res) => {
 
       // create access token
       const accessToken = jwt.sign(
-        { id: user._id }, 
+        { 
+          'UserInfo': {
+            'id': user._id 
+          }
+        }, 
         process.env.ACCESS_TOKEN_SECRET, 
         { expiresIn: '15m' }
       );

@@ -1,30 +1,28 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/UserModel');
 
-const verifyToken = (req, res, next) => {
-  if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
-    jwt.verify(req.headers.authorization.split(' ')[1], process.env.API_SECRET, function (err, decode) {
-      if (err) req.user = undefined;
-      User.findOne({
-          _id: decode.id
-        })
-        .exec((err, user) => {
-          if (err) {
-            res.status(500)
-              .send({
-                message: err
-              });
-          } else {
-            req.user = user;
-            next();
-          }
-        })
-    });
-  } else {
-    req.user = undefined;
-    next();
-  }
-};
-module.exports = verifyToken;
+const verifyJwt = (req, res, next) => {
+  
+  const authHeader = req.headers.authorization || req.headers.Authorization;
 
-// https://www.topcoder.com/thrive/articles/authentication-and-authorization-in-express-js-api-using-jwt
+  if (!authHeader?.startsWith('Bearer ')) {
+    return res.status(401).json({ message: 'Invalid token'});
+  }
+
+  const token = authHeader.split(' ')[1];
+
+  jwt.verify(
+    token,
+    process.env.ACCESS_TOKEN_SECRET,
+    (err, decoded) => {
+      if (err) {
+        return res.status(403).json({ message: 'Access Forbidden' });
+      }
+      req.user = decoded.UserInfo.id;
+      next();
+    }
+  );
+
+}
+
+module.exports = verifyJwt;
