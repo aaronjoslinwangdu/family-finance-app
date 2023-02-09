@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { isAuthenticated, signIn } = require('../controllers/AuthController');
+const { refresh, signOut, signIn } = require('../controllers/AuthController');
 
 router.route('/').post(signIn)
-router.route('/validate').post(isAuthenticated);
 router.route('/logout').post(signOut);
-router.route('/refresh').get();
+router.route('/refresh').get(refresh);
 
 module.exports = router;
