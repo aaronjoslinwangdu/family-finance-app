@@ -18,7 +18,7 @@ const verifyJwt = (req, res, next) => {
       if (err) {
         return res.status(403).json({ message: 'Access Forbidden' });
       }
-      req.user = decoded.UserInfo.id;
+      req.user = decoded.UserInfo.email;
       next();
     }
   );
