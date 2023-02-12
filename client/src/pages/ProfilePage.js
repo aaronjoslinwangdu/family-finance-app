@@ -4,7 +4,9 @@ const ProfilePage = (props) => {
   
 
   return (
-    <PrivatePage>Profile Page</PrivatePage>
+    <div>
+      Profile page.
+    </div>
   );
 };
 
