@@ -1,5 +1,3 @@
-import PrivatePage from "./PrivatePage";
-
 const ProfilePage = (props) => {
   
 
