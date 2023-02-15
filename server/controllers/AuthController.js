@@ -45,7 +45,7 @@ const signIn = asyncHandler(async (req, res) => {
   // create cookie with refresh token
   res.cookie('jwt', refreshToken, {
     httpOnly: false,                    // set back to true when using https
-    secure: true,
+    secure: false,
     sameSite: 'None',
     maxAge: 24 * 60 * 60 * 1000
   });
@@ -65,8 +65,8 @@ const signOut = asyncHandler(async (req, res) => {
   }
 
   res.clearCookie('jwt', {
-    httpOnly: true,
-    secure: true,
+    httpOnly: false,
+    secure: false,
     sameSite: 'None'
   });
 
@@ -79,6 +79,8 @@ const signOut = asyncHandler(async (req, res) => {
 // @route   GET /auth/refresh
 // @access  Public
 const refresh = asyncHandler(async (req, res) => {
+
+  const { email, password } = req.body;
 
   const cookies = req.cookies;
   if (!cookies?.jwt) {
@@ -107,7 +109,7 @@ const refresh = asyncHandler(async (req, res) => {
       const accessToken = jwt.sign(
         { 
           'UserInfo': {
-            'id': user._id 
+            'email': user.email
           }
         }, 
         process.env.ACCESS_TOKEN_SECRET, 
