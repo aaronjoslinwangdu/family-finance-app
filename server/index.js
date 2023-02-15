@@ -4,11 +4,14 @@ const port = process.env.PORT || 5000;
 const connectDatabase = require('./config/db');
 const { errorHandler } = require('./middleware/ErrorMiddleware');
 const cors = require('cors');
-const bodyparser = require("body-parser");
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser')
 
 connectDatabase();
 
 const app = express();
+
+app.use(cookieParser());
 
 app.use(cors({
     origin: '*'
@@ -22,7 +25,7 @@ app.use('/auth', require('./routes/AuthRoutes'));
 
 app.use(errorHandler);
 
-app.use(bodyparser.urlencoded({ extended: false }));
-app.use(bodyparser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
