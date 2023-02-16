@@ -28,7 +28,7 @@ const AuthForm = () => {
     let userAuthInfo;
 
     if (isLogin) {
-      url = 'http://localhost:5000/api/users/login';
+      url = 'http://localhost:5000/auth';
       userAuthInfo = {
         email: enteredEmail,
         password: enteredPassword
@@ -66,7 +66,6 @@ const AuthForm = () => {
       }
     })
     .then((data) => {
-      localStorage.setItem('accessToken', data.accessToken);
       history.replace('/profile');
     })
     .catch((error) => {

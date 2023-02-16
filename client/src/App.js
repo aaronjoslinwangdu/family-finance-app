@@ -14,7 +14,10 @@ function App() {
   return (
     <Layout>
       <Switch>
-        <Route path='/'>
+        <Route path='/' exact>
+          <Redirect to='/auth/' />
+        </Route>
+        <Route path='/auth/' >
           <AuthPage />
         </Route>
         <Route path='/users/profile'>
