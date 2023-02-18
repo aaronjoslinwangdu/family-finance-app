@@ -10,6 +10,9 @@ import classes from './Navigation.module.css';
 
 const Navigation = (props) => {
   const isSelecting = useSelector(state => state.expenses.isSelecting);
+  const token = useSelector(state => state.auth.token);
+
+
 
   return (
     <div className={classes.navigation}>
@@ -26,14 +29,16 @@ const Navigation = (props) => {
             <NavLink to='/expenses'>Expenses</NavLink>
           </li>
           <li>
-          <NavLink to='/groups'>Groups</NavLink>
+            <NavLink to='/groups'>Groups</NavLink>
           </li>
           <li>
-          <NavLink to='/users/profile'>Profile</NavLink>
+            <NavLink to='/users/profile'>Profile</NavLink>
           </li>
+          {token !== null &&
           <li>
-          <NavLink to='/users/login'>Login</NavLink>
+            <NavLink to='/auth/'>Logout</NavLink>
           </li>
+          }
         </ul>
       </nav>
     </div>
